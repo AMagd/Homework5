@@ -1,0 +1,30 @@
+clear all
+close all
+clc
+
+%% Robot parameters (in mm):
+% base lengths:
+wb = 0.164;
+sb = 0.567;
+ub = 0.327;
+
+% tool lengths:
+up = 0.044;
+sp = 0.076;
+wp = 0.022;
+
+% links lengths:
+L = 0.524;
+l = 1.244;
+pLink = 0.2
+
+T_base1 = Ty(-wb) * Rz(pi);
+T_base2 = Tx(sqrt(3)*wb/2) * Ty(0.5*wb) * Rz(-pi/3);
+T_base3 = Tx(-sqrt(3)*wb/2) * Ty(0.5*wb) * Rz(pi/3);
+
+T_bases = {T_base1, T_base2, T_base3};
+
+params = [L, l, sb, wb, ub, sp, wp, up];
+
+q = [-20.5 -20.5 -20.5]; % in degrees
+T = FK(q, params)
